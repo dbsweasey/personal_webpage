@@ -5,8 +5,10 @@ import Explode from "./Explode";
 export default function Intro() {
   const whiteStyle = {
     position: "fixed",
-    width: "100%",
-    height: "100%",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
     background: "white",
     zIndex: 99,
     transition: "opacity 4s ease",
@@ -14,8 +16,10 @@ export default function Intro() {
 
   const introStyle = {
     position: "fixed",
-    width: "100%",
-    height: "100%",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
     background: "radial-gradient(circle, #000000, white)",
     display: "flex",
     alignItems: "center",

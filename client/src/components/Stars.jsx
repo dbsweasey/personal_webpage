@@ -62,18 +62,23 @@ const STAR_COUNT = 400;
 export default function Stars() {
   const canvasRef = useRef(null);
 
-  const [size, setSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
+  const starsRef = useRef([]);
 
   const mouseRef = useRef({ x: null, y: null });
 
   const initialDirRef = useRef(Math.random() * 2 * Math.PI);
 
-  const generateStars = (width, height) => {
-    return Array.from({ length: STAR_COUNT }, () => new Star(width, height));
-  };
+  const [size, setSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    starsRef.current = Array.from(
+      { length: STAR_COUNT },
+      () => new Star(size.width, size.height)
+    );
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -81,7 +86,6 @@ export default function Stars() {
 
     const context = canvas.getContext("2d");
 
-    let stars = generateStars(size.width, size.height);
     let dir = initialDirRef.current;
     let animationFrameId;
 
@@ -94,15 +98,24 @@ export default function Stars() {
         width: window.innerWidth,
         height: window.innerHeight,
       });
+
+      starsRef.current.forEach((star) => {
+        star.canvasWidth = window.innerWidth;
+        star.canvasHeight = window.innerHeight;
+      });
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    if (window.innerWidth > 768) {
+      window.addEventListener("mousemove", handleMouseMove);
+    }
     window.addEventListener("resize", handleResize);
 
     const animate = () => {
       context.clearRect(0, 0, size.width, size.height);
 
-      stars.forEach((star) => {
+      starsRef.current.forEach((star) => {
         star.update(mouseRef.current, dir);
         star.draw(context);
       });

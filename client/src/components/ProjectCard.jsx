@@ -1,7 +1,7 @@
 export default function ProjectCard(props) {
   return (
     <div
-      onMouseEnter={() => {
+      onClick={() => {
         props.onHover(props.id);
       }}
       className="project-container"

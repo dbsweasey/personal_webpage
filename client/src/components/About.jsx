@@ -8,14 +8,14 @@ export default function About() {
     <div>
       <PageHeader title="About" />
       <div className="body-container">
-        {/* <div className="content-container"> */}
-        <div className="img-container">
-          <img src={picofme} />
+        <div className="content-container">
+          <div className="img-container">
+            <img src={picofme} />
+          </div>
+          <div className="spotify-container">
+            <Spotify />
+          </div>
         </div>
-        <div className="spotify-container">
-          <Spotify />
-        </div>
-        {/* </div> */}
         <div className="text-container">
           {bio.map((item, index) => (
             <div>

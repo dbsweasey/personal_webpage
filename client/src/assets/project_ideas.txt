@@ -1,0 +1,123 @@
+1. ML-Powered Content Classifier (Full Stack Optional)
+
+Description: Build a lightweight text classifier that categorizes content (e.g., news articles, movie reviews, product descriptions).
+Tech Highlights:
+
+Fine-tuning or feature extraction with a transformer model (DistilBERT or BERT-mini).
+
+Clean training pipeline in PyTorch.
+
+Simple FastAPI inference server.
+
+Optional small React dashboard to upload text and view predictions.
+
+Why it looks good: Shows applied NLP, model serving, and integration.
+
+2. Tabular ML “Predictor” with a Real Metrics Dashboard
+
+Pick a dataset with real outcomes (housing prices, loan approval, customer churn, etc.) and build:
+
+A model (tree-based or simple NN).
+
+A front-end dashboard visualizing predictions + model confidence.
+
+Clear evaluation metrics (ROC, confusion matrix, SHAP feature importance).
+
+Why it looks good: Demonstrates data pipeline, model evaluation, and interpretability.
+
+3. Image Similarity Search Engine
+
+Description: Use a pre-trained CNN (ResNet, EfficientNet) to extract embeddings from images and build a “find similar images” tool.
+
+Components:
+
+Backend: embedding generation + vector database (FAISS or even Annoy).
+
+Frontend: upload an image → retrieve and display the most similar samples.
+
+Why it looks good: Shows computer vision, vector retrieval, and product thinking.
+
+4. Personalized Recommendation Microservice
+
+Description: Train a simple content-based recommender (movies, books, music) using cosine similarity and metadata embeddings.
+Deliverable: REST API that returns “top N recommended items” for a given user history.
+
+Why it looks good: Recommendation systems are highly industry-relevant.
+
+Strong Web Development Projects (with optional ML hooks)
+5. Real-Time Web App (WebSockets) – e.g., Live Polling or Chat
+
+Description: Build a real-time app that updates live using WebSockets, not HTTP polling.
+Examples:
+
+Live polling app
+
+Minimal multiplayer game
+
+Live Q&A board with upvotes
+
+Why it looks good: Demonstrates mastery of real-time systems, scalability considerations, and frontend-backend communication.
+
+6. Media Player Dashboard with Recommendation Hooks
+
+Since you recently asked about a “Now Playing widget,” you could extend this into:
+
+A full music dashboard UI.
+
+User accounts + playlists.
+
+A small ML model that recommends similar songs using embeddings from Spotify API metadata.
+
+Why it looks good: Great blend of UI polish and ML integration.
+
+7. Automated Data Insights Tool
+
+Description: Upload a CSV → backend performs EDA, generates plots, computes correlations, and returns a simple PDF or HTML report.
+
+Tech Highlights:
+
+Pandas + FastAPI backend.
+
+Front-end drag-and-drop.
+
+Auto-generated charts via Plotly or Matplotlib.
+
+Optional LLM summarizer of insights.
+
+Why it looks good: Very “consultant-like” and useful for portfolio demonstrations.
+
+Hybrid Projects (Strong Portfolio Value, Medium Complexity)
+8. ML-Powered Annotation Tool
+
+A simple web app where users upload data and the model provides predicted labels that the user can confirm or correct.
+
+Why it looks great:
+Shows full ML lifecycle understanding (training → inference → human-in-the-loop improvements).
+
+9. AI-Powered Search Bar for a Web App
+
+Create a small knowledge base and implement an embedding-based semantic search that returns meaningful results.
+
+Tech Highlights:
+
+Sentence-transformer embeddings.
+
+Query → vector → similarity search.
+
+Display results in a sleek UI.
+
+Why it looks great:
+Demonstrates practical use of modern AI and full-stack engineering.
+
+10. Small LLM Chat Interface with a Custom Knowledge Base
+
+You can do this without hosting a heavy model:
+
+Use llama.cpp or a small 7B model locally.
+
+Add RAG using documents you supply.
+
+Build a simple chat UI with streaming responses.
+
+Why it looks great:
+Shows understanding of LLM serving, RAG, embedding storage, and real application design.

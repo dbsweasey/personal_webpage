@@ -3,10 +3,11 @@ import Marquee from "./Marquee";
 import notPlaying from "../assets/not-playing.png";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const PORT = import.meta.env.VITE_API_PORT || none;
+const PORT = import.meta.env.VITE_API_PORT || "none";
 
 let url = BASE_URL;
-if (PORT) {
+if (PORT === "none") {
+  console.log("In PROD, no port needed");
   url += `:${PORT}`;
 }
 

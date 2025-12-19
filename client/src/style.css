@@ -305,15 +305,13 @@ canvas {
   border-right: 3px solid rgba(255, 255, 255, 0.3);
   box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.438);
   border-radius: 10px;
-  overflow-y: auto;
-  max-height: 500px;
 }
 
 .skills-container {
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-family: "Courier New", Courier, monospace;
   backdrop-filter: blur(3px);
   border-bottom: 3px solid rgba(255, 255, 255, 0.3);

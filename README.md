@@ -4,9 +4,10 @@ A personal webpage built by me, for me, from scratch.
 
 # TODO
 
-- [ ] Upload my projects
-- [ ] Improve bio
+- [x] Upload my projects
+- [x] Improve bio
 - [x] Fill in skills
+- [x] Update contact links
 - [ ] Add documentation in .jsx files (CSS after refactoring)
 
 # DEV Branch

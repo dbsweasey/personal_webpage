@@ -1,24 +1,25 @@
 [
     {
-      "name": "Project 1",
+      "name": "Skin Cancer CNN Classifier",
       "link": "filler",
-      "img": "/project_images/testimage1.png",
-      "desc": "Description 1. This box will contain a title, an image, a link, and a short description."
+      "img": "/project_images/skin-cancer.png",
+      "desc": "A convolutional neural network designed to differentiate between benign and malignant skin lesions. Trained on a set of 10,000 images. Built using PyTorch and analyzed using Matplotlib. Boasts better than a 90% testing accuracy after 10 epochs of training."
     },
     {
-      "name": "Project 2",
+      "name": "NCDIT Procurement Tracker",
       "link": "filler",
-      "img": "/project_images/testimage2.png",
-      "desc": "LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION LONG DESCRIPTION "
+      "img": "/project_images/procurement-tracker.png",
+      "desc": "A full-stack web application built in collaboration with the North Carolina Department of IT. Designed to facilitate the complex IT procurement process by providing educational content, contact information, and a visual (similar to that of a pizza tracker) that displays an Agency's current step along the process. Built using Ruby on Rails, Rest API endpoints, a MySQL database, and containerized using Docker"
     },
     {
-      "name": "Project 3",
+      "name": "Online Poker",
       "link": "filler",
-      "desc": "These pieces of info come from a JSON file. How neat!"
+      "img": "/project_images/poker.png",
+      "desc": "The classic game of Texas Hold-Em built as a full-stack web app. Utilizes a Websocket for live game-state communication. A PostgreSQL database is used for user credential details and game history. Front-end componets are built in React, and the backend uses a Node + Express server. (Ongoing)"
     },
     {
-      "name": "Project 4",
+      "name": "To be determined...",
       "link": "filler",
-      "desc": "This is a sample project description."
+      "desc": "Stock visualizer? Not sure what to put here. Open to ideas"
     }
   ]

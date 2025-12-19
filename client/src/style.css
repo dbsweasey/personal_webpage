@@ -365,7 +365,8 @@ canvas {
   display: block;
   text-wrap: wrap;
   max-width: 300px;
-  height: 320px;
+  height: auto;
+  max-height: fit-content;
 }
 
 .now-playing {
@@ -536,15 +537,13 @@ canvas {
   }
 
   .img-container, .spotify-container {
-    float: none;
     height: auto;
     width: auto;
     max-width: none;
-    min-width: 0;
+    max-height: none;
     aspect-ratio: 1 / 1;
     margin: 0;
     max-width: 300px;
-    max-height: 300px;
   }
 
   .img-container {
@@ -788,7 +787,10 @@ canvas {
 
   .img-container, .spotify-container {
     max-width: 150px;
-    max-height: 175px;
+  }
+
+  .now-playing p {
+    font-size: 0.5rem;
   }
 
   .skill {
@@ -803,6 +805,6 @@ canvas {
   }
 
   .now-playing p {
-    font-size: 0.7rem;
+    font-size: 0.4rem;
   }
 }

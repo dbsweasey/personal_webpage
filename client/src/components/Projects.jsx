@@ -70,5 +70,5 @@ export default function Projects() {
     </div>
   );
 
-  return size.width > 800 ? computer : mobile;
+  return size.width > 768 ? computer : mobile;
 }

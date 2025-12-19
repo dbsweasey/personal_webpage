@@ -14,17 +14,11 @@ export default function ProjectDescription(props) {
         {project.name}
       </h2>
       <img
-        style={{
-          float: "right",
-          width: "200px",
-          height: "200px",
-          margin: "10px",
-          borderRadius: "50%",
-        }}
+        className="project-img"
         src={project.img || defaultImage}
         alt={project.name}
       />
-      <div style={{ clear: "left" }}>{project.desc}</div>
+      <p style={{ clear: "left" }}>{project.desc}</p>
     </div>
   );
 }

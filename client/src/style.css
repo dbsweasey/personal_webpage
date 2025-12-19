@@ -144,10 +144,6 @@ canvas {
   justify-content: right;
 }
 
-.hide-nav-container {
-  flex: 0.5;
-}
-
 .elevated-button {
   background-color: rgba(255, 255, 255, 0.227);
   color: rgb(255, 255, 255);
@@ -203,14 +199,6 @@ canvas {
       0 0 30px rgba(0, 200, 255, 0.4);
   }
 }
-.selected {
-  background-color: grey;
-}
-
-.spacer {
-  position: relative;
-  flex: 0.5;
-}
 
 .logo {
   flex: 1;
@@ -223,38 +211,14 @@ canvas {
   margin: 10px 20px 10px;
   cursor: pointer;
   position: relative;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.logo img {
-  max-height: 100%;
-  width: auto;
-  /* transform: skew(40deg); */
-  position: absolute;
-}
-
-.logo img#email {
-  max-height: 80%;
-  top: 8%;
-}
-
-#hide-button {
-  border: none;
-  border-radius: 8px;
-  height: 50px;
-  width: 50px;
-  margin: 10px 0 10px;
-  cursor: pointer;
-  position: absolute;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 1.3s ease;
-  left: 100px;
-  top: 35px;
-}
-
-#hide-button.show {
-  display: block;
-  transform: scaleX(1);
+.icon {
+  color: white;
 }
 
 #name {
@@ -363,13 +327,14 @@ canvas {
 }
 
 .content-container {
-  display: flex;
+  display: grid;
   margin-bottom: 20px;
+  grid-template-columns: repeat(3, auto);
   justify-content: center;
+  gap: 20px;
 }
 
 .img-container {
-  float: left;
   margin-right: 20px;
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(3px);
@@ -377,8 +342,8 @@ canvas {
   border-right: 3px solid rgba(255, 255, 255, 0.3);
   box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.438);
   border-radius: 10px;
-  display: block;
   width: 300px;
+  min-width: 300px;
   height: 320px;
 }
 
@@ -389,9 +354,8 @@ canvas {
 }
 
 .spotify-container {
-  margin-right: 5%;
   margin-left: 20px;
-  float: right;
+  flex: 1;
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(3px);
   border-bottom: 3px solid rgba(255, 255, 255, 0.3);
@@ -429,7 +393,26 @@ canvas {
 
 .now-playing p {
   margin: 10px 20px 10px 20px;
-  font-family: "Courier New, Courier, monospace";
+  font-family: Courier New, Courier, monospace;
+}
+
+.skill {
+  background-color: rgba(255, 255, 255, 0.227);
+  border-radius: 50px;
+  max-height: 30px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.skill-badge {
+  background: linear-gradient(135deg, #e74545, #772c71, #331972, #1c83a0);
+  border-radius: 50%;
+  flex: 1;
+  height: 20px;
+  width: 20px;
 }
 
 .projects-container {
@@ -488,6 +471,14 @@ canvas {
   min-height: 40px;
 }
 
+.project-img {
+  float: right;
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  border-radius: 50%;
+}
+
 .project-container > p {
   justify-self: center;
   margin-top: 5px;
@@ -537,10 +528,11 @@ canvas {
   }
 
   .content-container {
-    display: flex;
-    justify-content: center;
-    margin-left: 5%;
-    margin-right: 5%;
+    align-items: stretch;
+    grid-template-columns: repeat(2, auto);
+    grid-template-areas:
+    "one three"
+    "two two";
   }
 
   .img-container, .spotify-container {
@@ -548,19 +540,32 @@ canvas {
     height: auto;
     width: auto;
     max-width: none;
-    flex: 0 0 50%;
     min-width: 0;
     aspect-ratio: 1 / 1;
     margin: 0;
     max-width: 300px;
+    max-height: 300px;
   }
 
   .img-container {
+    grid-area: one;
+    justify-self: end;
     margin-left: 20px;
   }
 
-  .spotify-container {
+  .skills-container { 
+    grid-area: two; 
     margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .skill {
+    font-size: 20px;
+  }
+
+  .spotify-container {
+    grid-area: three;
+    justify-self: "start";
     margin-right: 20px;
   }
 
@@ -571,7 +576,6 @@ canvas {
   .img-container img {
     object-fit: contain;
     width: 100%;
-    height: auto;
   }
 
   .text-container {
@@ -606,6 +610,19 @@ canvas {
     margin-right: 5%;
   }
 
+  .page-header > h3 {
+    font-size: 2.5rem;
+    margin: 0;
+    margin-top: 15px;
+  }
+
+  .elevated-button {
+    font-size: 1.4rem;
+    height: 44px;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
   .nav-container,
   .contact-container {
     flex: none;
@@ -614,9 +631,14 @@ canvas {
     flex-wrap: wrap;
   }
 
+  .contact-container {
+    margin-top: 0
+  }
 
   .logo {
     margin: 6px;
+    height: 30px;
+    width: 30px;
   }
 
   /* HERO NAME */
@@ -652,28 +674,83 @@ canvas {
   }
 
   /* MAIN CONTENT */
-  .body-container,
   .projects-container {
     position: relative;
     margin-left: 0;
     width: 100%;
   }
 
+  .description-container {
+    overflow-y: auto;
+    max-height: none;
+  }
+
+  .description-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .description-container p {
+    font-size: 0.9rem;
+  }
+
+  .project-img {
+    width: 100px;
+    height: 100px;
+  }
 
   .description-container {
     margin-left: 5%;
     margin-right: 5%;
   }
 
+  .text-container {
+    font-size: 15px;
+  }
+
+  .now-playing {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: "Horizon";
+    text-wrap: wrap;
+    overflow: hidden;
+  } 
+
+  .now-playing h1 {
+    font-size: 1rem;
+  }
+
+  .now-playing img {
+    width: 60%;
+    height: 60%;
+  }
+
+  .now-playing p {
+    margin-left: 10%;
+    margin-top: 0;
+    font-size: 0.7rem;
+  }
+
+  .skill {
+    font-size: 15px;
+    padding: 5px;
+  }
+
+  .skill-badge {
+    height: 10px;
+    width: 10px;
+  }
+
   /* PROJECTS */
   .projects-container {
     flex-direction: column;
     padding: 0;
+    margin-top: 15px;
   }
 
   .project-list-container {
     margin-left: 0;
-    margin-top: 20px;
+    margin-top: 0;
   }
 
   .project-container {
@@ -696,5 +773,32 @@ canvas {
     transform: none;
     animation: none;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media(max-width: 620px) {
+  .now-playing img {
+    width: 50%;
+    height: 50%;
+  }
+
+  .img-container, .spotify-container {
+    max-width: 150px;
+    max-height: 175px;
+  }
+
+  .skill {
+    font-size: 0.8rem;
+  }
+}
+
+@media(max-width: 400px) {
+  .now-playing img {
+    width: 40%;
+    height: 40%;
+  }
+
+  .now-playing p {
+    font-size: 0.7rem;
   }
 }

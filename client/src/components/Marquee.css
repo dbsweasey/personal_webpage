@@ -49,3 +49,11 @@
     font-size: 0.8rem;
   }
 }
+
+@media (max-width: 500px) {
+  .marquee-container {
+    width: 70%;
+    height: 30px;
+    font-size: 0.6rem;
+  }
+}

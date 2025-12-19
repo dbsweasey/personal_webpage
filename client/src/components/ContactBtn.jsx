@@ -8,17 +8,13 @@ export default function ContactBtn(props) {
     switch (props.name) {
       case "github":
         url = "https://dbsweasey.github.io";
-        return (
-          <GitHubIcon
-            style={{ color: "white", width: "auto", height: "auto" }}
-          />
-        );
+        return <GitHubIcon className="icon" fontSize="inherit" />;
       case "email":
         url = "https://google.com";
-        return <EmailIcon style={{ width: "auto", height: "auto" }} />;
+        return <EmailIcon className="icon" fontSize="inherit" />;
       case "linkedin":
         url = "https://www.linkedin.com/in/david-sweasey/";
-        return <LinkedInIcon style={{ width: "auto", height: "auto" }} />;
+        return <LinkedInIcon className="icon" fontSize="inherit" />;
     }
   };
 

@@ -1,6 +1,7 @@
 import picofme from "../assets/picofme.PNG";
 import PageHeader from "./PageHeader";
 import Spotify from "./Spotify";
+import Skills from "./Skills.jsx";
 import bio from "../assets/bio.js";
 
 export default function About() {
@@ -12,6 +13,7 @@ export default function About() {
           <div className="img-container">
             <img src={picofme} />
           </div>
+          <Skills />
           <div className="spotify-container">
             <Spotify />
           </div>

@@ -10,6 +10,9 @@ body {
   height: 100%;
   background: black;
   overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
 }
 
 p,
@@ -285,11 +288,9 @@ canvas {
 }
 
 .body-container {
-  position: fixed;
   padding-top: 20px;
   margin-left: 5%;
   margin-right: 5%;
-  /* overflow: hidden; */
 }
 
 .text-container {
@@ -416,7 +417,7 @@ canvas {
 }
 
 .projects-container {
-  position: fixed;
+  position: relative;
   padding-left: 5%;
   padding-right: 5%;
   /* overflow: hidden; */
@@ -438,7 +439,7 @@ canvas {
   box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.438);
   border-radius: 10px;
   overflow-y: auto;
-  max-height: 500px;
+  max-height: 350px;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
   margin-bottom: 20px;
@@ -514,8 +515,8 @@ canvas {
 }
 
 .footer {
-  position: fixed;
-  bottom: 10px;
+  position: relative;
+  margin-top: 40px;
   width: 100%;
   text-align: center;
   color: white;

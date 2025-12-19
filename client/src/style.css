@@ -204,13 +204,12 @@ canvas {
 }
 
 .logo {
-  flex: 1;
   background-color: rgba(255, 255, 255, 0.227);
   border: none;
   border-radius: 8px;
   height: 50px;
-  max-width: 50px;
-  min-width: 50px;
+  width: 50px;
+  flex: 0 0 auto;
   margin: 10px 20px 10px;
   cursor: pointer;
   position: relative;
@@ -222,6 +221,8 @@ canvas {
 
 .icon {
   color: white;
+  font-size: 100px;
+  margin: 0;
 }
 
 #name {
@@ -620,8 +621,10 @@ canvas {
   .elevated-button {
     font-size: 1.4rem;
     height: 44px;
+    max-width: 150px;
     margin-right: 20px;
     margin-left: 20px;
+    padding: 0;
   }
 
   .nav-container,
@@ -637,10 +640,12 @@ canvas {
   }
 
   .logo {
+    padding: 0;
     margin: 6px;
-    height: 30px;
-    width: 30px;
+    width: 36px;
+    height: 36px;
   }
+
 
   /* HERO NAME */
   #name {

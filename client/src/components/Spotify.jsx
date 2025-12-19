@@ -62,7 +62,7 @@ export default function Spotify() {
         <img src={trackInfo.albumImage} alt={trackInfo.name} />
       </div>
       <Marquee text={trackInfo.name} />
-      <p>{trackInfo.artists || ""}test </p>
+      <p>{trackInfo.artists || ""}</p>
     </div>
   );
 }

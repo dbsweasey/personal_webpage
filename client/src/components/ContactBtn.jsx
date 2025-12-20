@@ -7,10 +7,10 @@ export default function ContactBtn(props) {
   const getLogo = () => {
     switch (props.name) {
       case "github":
-        url = "https://dbsweasey.github.io";
+        url = "https://github.com/dbsweasey";
         return <GitHubIcon className="icon" fontSize="inherit" />;
       case "email":
-        url = "https://google.com";
+        url = "mailto:davidbsweasey@gmail.com?subject=Website%20Inquiry";
         return <EmailIcon className="icon" fontSize="inherit" />;
       case "linkedin":
         url = "https://www.linkedin.com/in/david-sweasey/";

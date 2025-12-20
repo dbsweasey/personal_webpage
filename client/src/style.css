@@ -204,13 +204,12 @@ canvas {
 }
 
 .logo {
-  flex: 1;
   background-color: rgba(255, 255, 255, 0.227);
   border: none;
   border-radius: 8px;
   height: 50px;
-  max-width: 50px;
-  min-width: 50px;
+  width: 50px;
+  flex: 0 0 auto;
   margin: 10px 20px 10px;
   cursor: pointer;
   position: relative;
@@ -222,6 +221,8 @@ canvas {
 
 .icon {
   color: white;
+  font-size: 100px;
+  margin: 0;
 }
 
 #name {
@@ -304,15 +305,13 @@ canvas {
   border-right: 3px solid rgba(255, 255, 255, 0.3);
   box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.438);
   border-radius: 10px;
-  overflow-y: auto;
-  max-height: 500px;
 }
 
 .skills-container {
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-family: "Courier New", Courier, monospace;
   backdrop-filter: blur(3px);
   border-bottom: 3px solid rgba(255, 255, 255, 0.3);
@@ -345,11 +344,13 @@ canvas {
   border-radius: 10px;
   width: 300px;
   min-width: 300px;
-  height: 320px;
+  max-height: 400px;
+  height: auto;
 }
 
 .img-container img {
   object-fit: contain;
+  align-self: flex-end;
   width: 100%;
   height: 100%;
 }
@@ -366,7 +367,8 @@ canvas {
   display: block;
   text-wrap: wrap;
   max-width: 300px;
-  height: 320px;
+  max-height: 400px;
+  height: auto;
 }
 
 .now-playing {
@@ -542,10 +544,9 @@ canvas {
     width: auto;
     max-width: none;
     min-width: 0;
-    aspect-ratio: 1 / 1;
     margin: 0;
     max-width: 300px;
-    max-height: 300px;
+    min-height: 330px;
   }
 
   .img-container {
@@ -568,6 +569,7 @@ canvas {
     grid-area: three;
     justify-self: "start";
     margin-right: 20px;
+    height: fit-content;
   }
 
   .now-playing h1 {
@@ -620,8 +622,10 @@ canvas {
   .elevated-button {
     font-size: 1.4rem;
     height: 44px;
+    max-width: 150px;
     margin-right: 20px;
     margin-left: 20px;
+    padding: 0;
   }
 
   .nav-container,
@@ -637,10 +641,12 @@ canvas {
   }
 
   .logo {
+    padding: 0;
     margin: 6px;
-    height: 30px;
-    width: 30px;
+    width: 36px;
+    height: 36px;
   }
+
 
   /* HERO NAME */
   #name {
@@ -702,6 +708,11 @@ canvas {
   .description-container {
     margin-left: 5%;
     margin-right: 5%;
+  }
+
+  .img-container, .spotify-container {
+    max-width: 200px;
+    min-height: 225px;
   }
 
   .text-container {
@@ -785,7 +796,11 @@ canvas {
 
   .img-container, .spotify-container {
     max-width: 150px;
-    max-height: 175px;
+    min-height: 175px;
+  }
+
+  .now-playing p {
+    font-size: 0.5rem;
   }
 
   .skill {
@@ -800,6 +815,6 @@ canvas {
   }
 
   .now-playing p {
-    font-size: 0.7rem;
+    font-size: 0.5rem;
   }
 }

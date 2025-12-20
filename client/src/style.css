@@ -322,6 +322,7 @@ canvas {
   flex-direction: row;
   flex-wrap: wrap;
   align-content: flex-start;
+  justify-content: center;
   gap: 10px;
   max-width: 1000px;
 }
@@ -458,11 +459,14 @@ canvas {
 .project-container {
   flex: 1;
   margin-bottom: 20px;
-  padding: 20px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
-  font-size: 2rem;
-  font-family: "Horizon";
+  font-size: 1.7rem;
+  font-family: "Courier New", Courier, monospace;
   backdrop-filter: blur(3px);
   border-bottom: 3px solid rgba(255, 255, 255, 0.3);
   border-right: 3px solid rgba(255, 255, 255, 0.3);
@@ -470,8 +474,8 @@ canvas {
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.2s ease;
-  max-height: 40px;
-  min-height: 40px;
+  /* max-height: 40px; */
+  min-height: 80px;
 }
 
 .project-img {
@@ -483,6 +487,7 @@ canvas {
 }
 
 .project-container > p {
+  font-weight: bold;
   justify-self: center;
   margin-top: 5px;
 }
@@ -523,6 +528,12 @@ canvas {
   text-align: center;
   color: white;
   font-family: "Courier New", Courier, monospace;
+}
+
+@media (max-width: 1600px) {
+  .project-container {
+    font-size: 1.2rem;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -681,11 +692,6 @@ canvas {
   }
 
   /* MAIN CONTENT */
-  .projects-container {
-    position: relative;
-    margin-left: 0;
-    width: 100%;
-  }
 
   .description-container {
     overflow-y: auto;
@@ -769,8 +775,7 @@ canvas {
     font-size: 1.2rem;
     margin-left: 5%;
     margin-right: 5%;
-    max-height: none;
-    min-height: auto;
+    min-height: 80px;
   }
 
   /* FOOTER */

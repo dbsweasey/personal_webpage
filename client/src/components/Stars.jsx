@@ -57,7 +57,7 @@ class Star {
   }
 }
 
-const STAR_COUNT = 400;
+const STAR_COUNT = window.innerWidth < 1000 ? 100 : 400;
 
 export default function Stars() {
   const canvasRef = useRef(null);

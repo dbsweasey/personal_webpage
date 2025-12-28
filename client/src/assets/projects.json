@@ -18,8 +18,8 @@
       "desc": "The classic game of Texas Hold-Em built as a full-stack web app. Utilizes a Websocket for live game-state communication. A PostgreSQL database is used for user credential details and game history. Front-end componets are built in React, and the backend uses a Node + Express server. (Ongoing)"
     },
     {
-      "name": "To be determined...",
+      "name": "Stock Visualizer",
       "link": "filler",
-      "desc": "Stock visualizer? Not sure what to put here. Open to ideas"
+      "desc": "An interactive stock visualizer with a sleuth of technical indicators, real-time notifications, and built in AI assistance. Still in the design phase."
     }
   ]

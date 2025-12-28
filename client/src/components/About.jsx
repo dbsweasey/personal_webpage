@@ -3,7 +3,7 @@ import PageHeader from "./PageHeader";
 import Spotify from "./Spotify";
 import Skills from "./Skills.jsx";
 import bio from "../assets/bio.js";
-import resume from "../assets/David_Sweasey_Resume.pdf";
+import resume from "/David_Sweasey_Resume.pdf";
 
 export default function About() {
   return (

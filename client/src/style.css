@@ -511,6 +511,7 @@ canvas {
   transition: transform 0.2s ease;
   /* max-height: 40px; */
   min-height: 80px;
+  max-height: 80px;
 }
 
 .project-img {

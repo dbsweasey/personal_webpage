@@ -434,6 +434,26 @@ canvas {
   width: 20px;
 }
 
+.resume-link {
+  text-decoration: none;
+  color: white;
+  transition: text-decoration 3s ease-in;
+}
+
+.resume-link-underline {
+  background-color: white;
+  height: 2px;
+  width: 375px;
+  border-radius: 20px;
+  transform: scaleX(0);
+  transform-origin: bottom left;
+  transition: transform 0.3s ease;
+}
+
+.resume-link:hover ~ .resume-link-underline {
+  transform: scaleX(1);
+}
+
 .projects-container {
   position: relative;
   padding-left: 5%;
@@ -614,6 +634,14 @@ canvas {
     max-height: none;
   }
 
+  .resume-link:hover {
+    transition: none;
+  }
+
+  .resume-link-underline {
+    opacity: 0;
+  }
+
   .body-container {
     position: relative;
     margin-left: 0;
@@ -767,6 +795,7 @@ canvas {
   .skill {
     font-size: 15px;
     padding: 5px;
+    padding-right: 10px;
   }
 
   .skill-badge {

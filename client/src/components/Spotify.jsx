@@ -44,6 +44,7 @@ export default function Spotify() {
       name: track.name,
       artists: track.artists,
       albumImage: track.albumImage,
+      url: track.url,
     };
   }
 
@@ -59,7 +60,20 @@ export default function Spotify() {
           justifyContent: "center",
         }}
       >
-        <img src={trackInfo.albumImage} alt={trackInfo.name} />
+        <a
+          class="spotify-link"
+          href={trackInfo.url || "#"}
+          target="_blank"
+          onClick={(e) => {
+            if (!trackInfo.url) e.preventDefault();
+          }}
+        >
+          <img
+            className="spotify-image"
+            src={trackInfo.albumImage}
+            alt={trackInfo.name}
+          />
+        </a>
       </div>
       <Marquee text={trackInfo.name} />
       <p>{trackInfo.artists}</p>

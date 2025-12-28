@@ -3,6 +3,7 @@ import PageHeader from "./PageHeader";
 import Spotify from "./Spotify";
 import Skills from "./Skills.jsx";
 import bio from "../assets/bio.js";
+import resume from "/David_Sweasey_Resume.pdf";
 
 export default function About() {
   return (
@@ -25,6 +26,11 @@ export default function About() {
               {index + 1 < bio.length && <br></br>}
             </div>
           ))}
+          <br></br>
+          <a href={resume} target="_blank" className="resume-link">
+            {">"} Click here for my Resume
+          </a>
+          <div className="resume-link-underline"></div>
         </div>
       </div>
     </div>

@@ -2,24 +2,13 @@
 
 A personal webpage built by me, for me, from scratch.
 
-# TODO
+## Overview
 
-- [x] Upload my projects
-- [x] Improve bio
-- [x] Fill in skills
-- [x] Update contact links
-- [ ] Add documentation in .jsx files (CSS after refactoring)
+Check out my Website! It outlines me, my resume, my passions, and my projects. Do not hesitate to reach out if you have any questions, or just wanna chat!
 
-# DEV Branch
-
-- [ ] Find a place for a resume
-- [ ] Explore why Chrome Dev Tools has a weird visual during the intro
-- [ ] CSS refactor
-  - [ ] Remove floats; use flex and grid
-  - [ ] Global CSS
-  - [ ] module wise CSS for React components
-  - [ ] Remove duplicates
-
-# Future Ideas
-
-[ ] - Add random shooting stars which give suprise when clicked
+## Future Improvements
+Be on the lookout for these updates hopefully coming soon
+- Virtual twin (AI-powered avatar to answer questions about me)
+- Project demos (posted to youtube)
+- More projects
+- Other suprises

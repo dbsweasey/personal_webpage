@@ -465,6 +465,10 @@ canvas {
 }
 
 .description-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
   flex-basis: 60%;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.3);
@@ -476,8 +480,9 @@ canvas {
   border-right: 3px solid rgba(255, 255, 255, 0.3);
   box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.438);
   border-radius: 10px;
+  min-height: 350px;
+  max-height: 600px;
   overflow-y: auto;
-  max-height: 350px;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
   margin-bottom: 20px;
@@ -529,6 +534,35 @@ canvas {
 }
 
 .project-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  animation: project-glow 0.5s infinite;
+}
+
+.project-actions-container {
+  display: flex;
+  gap: 30px;
+  flex-direction: row;
+  justify-content: right;
+}
+
+.project-action {
+  font-size: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-family: "Courier New", Courier, monospace;
+  padding: 10px;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+  border-right: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.438);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.project-action:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   animation: project-glow 0.5s infinite;
@@ -739,7 +773,9 @@ canvas {
 
   .description-container {
     overflow-y: auto;
-    max-height: none;
+    min-height: 0;
+    margin-left: 5%;
+    margin-right: 5%;
   }
 
   .description-container h2 {
@@ -755,9 +791,9 @@ canvas {
     height: 100px;
   }
 
-  .description-container {
-    margin-left: 5%;
-    margin-right: 5%;
+  .project-action {
+    font-size: 1rem;
+    padding: 6px;
   }
 
   .img-container, .spotify-container {

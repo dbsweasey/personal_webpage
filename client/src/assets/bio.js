@@ -7,8 +7,9 @@ const bio = [
     paragraph: `During my time at NC State, I had the opportunity to work on several exciting projects, including developing a machine learning model to differentiate between benign and malignant skin lesions, and creating a web application for monitoring Statewide IT Procurement Status.`,
   },
   {
-    paragraph: `I am currently employeed as an AI and Automation Analyst with NCDIT, where I work on implementing AI solutions to improve Statewide IT Procurement.
-    I leverage UiPath and the Microsoft Power Platform, and have become familiar with Azure AI Foundry.`,
+    paragraph: `I am currently employed as an AI and Automation Analyst with the North Carolina Department
+    of IT (NCDIT), where I work on implementing AI solutions to improve Statewide IT Procurement.
+    I leverage UiPath, the Microsoft Power Platform, and Azure.`,
   },
   {
     paragraph: `There is enormous potential at the intersection of machine learning and medicine. 
@@ -18,7 +19,7 @@ const bio = [
   },
   {
     paragraph: `Please do not hesitate to reach out
-    for business inqueries or if you just want to chat. I am always on the pursuit for more knowledge!`,
+    for business inquiries or if you just want to chat. I am always on the pursuit for more knowledge!`,
   },
 ];
 

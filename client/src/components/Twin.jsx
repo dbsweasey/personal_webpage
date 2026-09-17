@@ -133,6 +133,15 @@ export default function Twin() {
       });
 
       if (!response.ok) {
+        setAgentTyping(false);
+        setMessages(prev => [
+          ...prev,
+          {
+            "role": "twin",
+            "body": "Sorry, I could not connect to the agent service. Please try again later.",
+            "timestamp": getCurrentFormattedTime()
+          }
+        ]);
         throw new Error(`Could not connect to agent service. Status: ${response.status}`);
       }
       const data = await response.json();

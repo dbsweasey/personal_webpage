@@ -43,6 +43,13 @@ export default function Navbar(props) {
           }}
           name={currentPage === "About" ? "Home" : "About"}
         ></Navbutton>
+        <Navbutton
+          click={() => {
+            props.onPageChange(currentPage === "Twin" ? "Home" : "Twin");
+            setCurrentPage(currentPage === "Twin" ? "Home" : "Twin")
+          }}
+          name={currentPage === "Twin" ? "Home" : "Twin"}
+        ></Navbutton>
       </div>
 
       <div className="contact-container">

@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
 import Projects from "./components/Projects";
+import Twin from "./components/Twin";
 import Stars from "./components/Stars";
 import Intro from "./components/Intro";
 import Footer from "./components/Footer";
@@ -30,6 +31,8 @@ function App() {
         return <About />;
       case "Projects":
         return <Projects />;
+      case "Twin":
+        return <Twin />;
       default:
         return <Home />;
     }

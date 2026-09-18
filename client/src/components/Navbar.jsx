@@ -5,6 +5,8 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import MotionPhotosOffIcon from "@mui/icons-material/MotionPhotosOff";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useEffect, useState } from "react";
 
 export default function Navbar(props) {
@@ -15,6 +17,14 @@ export default function Navbar(props) {
   // The entrance glow only ever plays once, on the real timed reveal.
   const [playGlow, setPlayGlow] = useState(false);
   const [currentPage, setCurrentPage] = useState("Home");
+  // Mobile-only: expanded by default on Home, collapsed by default on every
+  // other page. Resets on every navigation rather than being remembered.
+  const [navExpanded, setNavExpanded] = useState(props.activePage === "Home");
+  const [lastActivePage, setLastActivePage] = useState(props.activePage);
+  if (props.activePage !== lastActivePage) {
+    setLastActivePage(props.activePage);
+    setNavExpanded(props.activePage === "Home");
+  }
 
   useEffect(() => {
     // Intro disabled: reveal instantly, no glow, no delay.
@@ -47,12 +57,27 @@ export default function Navbar(props) {
     };
   }, [props.introEnabled, navbarShow]);
 
-  const navClass = [navbarShow ? "show" : "", playGlow ? "animation" : ""]
+  const navClass = [
+    navbarShow ? "show" : "",
+    playGlow ? "animation" : "",
+    navExpanded ? "nav-expanded" : "",
+  ]
     .filter(Boolean)
     .join(" ");
 
   return (
     <div id="top" className={navClass}>
+      <div className="nav-toggle">
+        <OptionToggleBtn
+          enabled={navExpanded}
+          onClick={() => setNavExpanded((prev) => !prev)}
+          onIcon={CloseIcon}
+          offIcon={MenuIcon}
+          label={navExpanded ? "Collapse navigation" : "Expand navigation"}
+        />
+        {props.pageTitle && <h3 className="nav-page-title">{props.pageTitle}</h3>}
+      </div>
+
       <div className="nav-container">
         <Navbutton
           click={() => {

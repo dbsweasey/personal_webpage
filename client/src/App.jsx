@@ -11,6 +11,12 @@ import Footer from "./components/Footer";
 const STARS_ENABLED_KEY = "starsEnabled";
 const INTRO_ENABLED_KEY = "introEnabled";
 
+const PAGE_TITLES = {
+  About: "About",
+  Projects: "Projects",
+  Twin: "Digital Twin",
+};
+
 function readStoredFlag(key) {
   try {
     return localStorage.getItem(key) !== "false";
@@ -30,8 +36,6 @@ function App() {
   );
 
   useEffect(() => {
-    // Disabling the intro means there's nothing left to play - mark the
-    // sequence as permanently finished so re-enabling later never replays it.
     if (!introEnabled) {
       setIntro(true);
       return;
@@ -55,7 +59,7 @@ function App() {
       try {
         localStorage.setItem(key, String(next));
       } catch {
-        // localStorage unavailable (private browsing, etc.) - toggle still works for this session
+        // localStorage unavailable
       }
       return next;
     });
@@ -89,6 +93,7 @@ function App() {
         <Navbar
           onPageChange={handlePageChange}
           activePage={activePage}
+          pageTitle={PAGE_TITLES[activePage] ?? null}
           starsEnabled={starsEnabled}
           introEnabled={introEnabled}
           onToggleStars={handleToggleStars}

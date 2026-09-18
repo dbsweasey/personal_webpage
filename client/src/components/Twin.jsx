@@ -78,7 +78,10 @@ export default function Twin() {
   }
 
   useEffect(() => {
-    if (!agentTyping) {
+    // Don't steal focus on mobile - it pops the on-screen keyboard open
+    // unprompted. Tapping the composer (handleComposerClick) still focuses
+    // it intentionally.
+    if (!agentTyping && window.innerWidth > 768) {
       textareaRef.current?.focus()
     }
   }, [agentTyping]);

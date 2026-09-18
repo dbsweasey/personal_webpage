@@ -29,6 +29,10 @@ a {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  /* dvh accounts for mobile browser chrome and the on-screen keyboard, so
+     fixed-height content (like the Twin composer) never ends up pushed
+     below the visible area. Falls back to 100vh where dvh isn't supported. */
+  height: 100dvh;
 }
 
 body::before {

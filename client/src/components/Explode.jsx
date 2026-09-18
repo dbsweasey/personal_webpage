@@ -1,7 +1,13 @@
 import { useRef, useState, useEffect } from "react";
 
+// Fewer particles on small/mobile viewports - same threshold Stars.jsx
+// uses, since the two run concurrently during the explosion and mobile
+// CPUs can't keep up with the desktop-tuned particle count at 60fps.
+const PARTICLE_COUNT = window.innerWidth < 1000 ? 60 : 150;
+
 export default function Explode() {
   const canvasRef = useRef(null);
+  const starsRef = useRef([]);
   const [size, setSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -15,13 +21,28 @@ export default function Explode() {
   };
 
   const generateStars = (width, height) => {
+    // Scale particle size/speed down for smaller viewports, so the burst
+    // takes up roughly the same proportion of the screen on a phone as it
+    // does on a desktop monitor, instead of the same fixed pixel sizes
+    // looking oversized on a small screen. Capped at 1 so desktop (already
+    // tuned) is unaffected, floored at 0.5 so mobile particles don't shrink
+    // to near-invisible.
+    const scale = Math.min(1, Math.max(0.5, Math.min(width, height) / 1000));
+
     let particles = [];
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
       particles.push({
         x: width / 2,
         y: height / 2,
-        radius: Math.random() * 3 + 1,
-        mag: (Math.random() + 0.2) * 20,
+        radius: (Math.random() * 3 + 1) * scale,
+        // Lower base magnitude (was *20) than the original tuning: since
+        // movement is delta-scaled to real elapsed time, a device
+        // rendering fewer actual frames doesn't just play the burst at the
+        // right speed - each frame it *does* render has to jump further to
+        // stay on schedule, which reads as choppy/stroboscopic rather than
+        // "slow." Smaller per-frame jumps are less perceptible as choppy
+        // even when the frame rate itself is uneven.
+        mag: (Math.random() + 0.2) * 12 * scale,
         dir: Math.random() * 2 * Math.PI,
         speedX: (Math.random() - 0.5) * 30,
         speedY: (Math.random() - 0.5) * 5,
@@ -31,38 +52,71 @@ export default function Explode() {
     return particles;
   };
 
+  // Generate the burst once, on mount - not tied to `size`, so a resize
+  // mid-explosion (e.g. a mobile browser's address bar collapsing) can't
+  // wipe it out and restart the animation from scratch.
+  useEffect(() => {
+    starsRef.current = generateStars(size.width, size.height);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     const canvas = canvasRef.current;
 
     const context = canvas.getContext("2d");
+    // Solid white; per-particle fade is done with globalAlpha below instead
+    // of re-parsing a fresh `rgba(...)` color string on every particle,
+    // every frame - a real cost in a loop running 60x/sec.
+    context.fillStyle = "rgb(255, 255, 255)";
 
-    let stars = generateStars(size.width, size.height);
     let animationFrameId;
+    let lastTime = null;
+
+    // Same per-frame -> per-time normalization as Stars.jsx, so the
+    // explosion plays at the same speed on every display.
+    const BASE_FRAME_MS = 1000 / 60;
+    const MAX_DELTA = 4;
+
+    // Bias movement toward whichever axis the screen is actually longer
+    // on, instead of a fixed "X moves 2x Y" - that happened to look right
+    // on wide desktop monitors but is backwards on a tall phone screen,
+    // where the burst should spread more vertically, not horizontally.
+    const minDim = Math.min(size.width, size.height);
+    const xBias = size.width / minDim;
+    const yBias = size.height / minDim;
 
     window.addEventListener("resize", resizeCanvas);
 
-    const animate = () => {
-      context.clearRect(0, 0, size.width, size.height);
-      stars.forEach((s) => {
-        s.x += s.mag * Math.cos(s.dir) * 2;
-        s.y += s.mag * Math.sin(s.dir);
-        s.alpha -= 0.015;
+    const animate = (timestamp) => {
+      if (lastTime === null) lastTime = timestamp;
+      const delta = Math.min(
+        (timestamp - lastTime) / BASE_FRAME_MS,
+        MAX_DELTA
+      );
+      lastTime = timestamp;
 
+      context.clearRect(0, 0, size.width, size.height);
+      starsRef.current.forEach((s) => {
+        s.x += s.mag * Math.cos(s.dir) * xBias * delta;
+        s.y += s.mag * Math.sin(s.dir) * yBias * delta;
+        s.alpha -= 0.015 * delta;
+
+        context.globalAlpha = Math.max(s.alpha, 0);
         context.beginPath();
         context.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        context.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
         context.fill();
       });
 
-      stars = stars.filter((s) => s.alpha > 0);
-      if (stars.length > 0) {
+      starsRef.current = starsRef.current.filter((s) => s.alpha > 0);
+      if (starsRef.current.length > 0) {
         animationFrameId = requestAnimationFrame(animate);
       }
     };
 
-    animate();
+    animationFrameId = requestAnimationFrame(animate);
 
     return () => {
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", resizeCanvas);
     };
   }, [size.width, size.height]);

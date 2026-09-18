@@ -16,7 +16,7 @@ class Star {
     this.alphaMult = Math.floor(Math.random() + 0.5) === 0 ? -1 : 1;
   }
 
-  repel(mouse) {
+  repel(mouse, delta) {
     if (mouse.x === null || mouse.y === null) return;
 
     const dx = this.x - mouse.x;
@@ -27,21 +27,21 @@ class Star {
     if (dist < minDist && dist > 0.1) {
       const angle = Math.atan2(dy, dx);
       const force = (minDist - dist) / minDist;
-      this.x += Math.cos(angle) * this.mag * force * 3;
-      this.y += Math.sin(angle) * this.mag * force * 3;
+      this.x += Math.cos(angle) * this.mag * force * 3 * delta;
+      this.y += Math.sin(angle) * this.mag * force * 3 * delta;
     }
   }
 
-  update(mouse, dir) {
-    this.repel(mouse);
+  update(mouse, dir, delta) {
+    this.repel(mouse, delta);
 
-    this.x += Math.cos(dir) * this.mag;
-    this.y += Math.sin(dir) * this.mag;
+    this.x += Math.cos(dir) * this.mag * delta;
+    this.y += Math.sin(dir) * this.mag * delta;
 
     if (this.alpha >= 1 || this.alpha <= 0.5) {
       this.alphaMult *= -1;
     }
-    this.alpha += 0.04 * this.alphaMult;
+    this.alpha += 0.04 * this.alphaMult * delta;
 
     if (this.x > this.canvasWidth) this.x = 0;
     if (this.x < 0) this.x = this.canvasWidth;
@@ -88,6 +88,14 @@ export default function Stars() {
 
     let dir = initialDirRef.current;
     let animationFrameId;
+    let lastTime = null;
+
+    // Original motion constants were tuned per-frame assuming ~60fps.
+    // Normalizing by elapsed time keeps speed identical regardless of
+    // the display's refresh rate, and a clamp avoids a big teleport-y
+    // jump after a dropped frame or a backgrounded tab.
+    const BASE_FRAME_MS = 1000 / 60;
+    const MAX_DELTA = 4;
 
     const handleMouseMove = (e) => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
@@ -112,25 +120,40 @@ export default function Stars() {
     }
     window.addEventListener("resize", handleResize);
 
-    const animate = () => {
+    const handleVisibilityChange = () => {
+      // Drop the stale timestamp so we don't compute a huge delta
+      // (and a big jump) when the tab becomes visible again.
+      if (document.hidden) lastTime = null;
+    };
+
+    const animate = (timestamp) => {
+      if (lastTime === null) lastTime = timestamp;
+      const delta = Math.min(
+        (timestamp - lastTime) / BASE_FRAME_MS,
+        MAX_DELTA
+      );
+      lastTime = timestamp;
+
       context.clearRect(0, 0, size.width, size.height);
 
       starsRef.current.forEach((star) => {
-        star.update(mouseRef.current, dir);
+        star.update(mouseRef.current, dir, delta);
         star.draw(context);
       });
 
-      dir += 0.0001;
+      dir += 0.0001 * delta;
 
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animate();
+    animationFrameId = requestAnimationFrame(animate);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [size.width, size.height]);
 

@@ -8,11 +8,12 @@ import TypingIndicator from "./TypingIndicator";
 
 export default function Twin() {
   const URL = import.meta.env.VITE_AGENT_URL;
+  console.log("Agent URL:", URL);
 
   if (!URL) {
     throw new Error("VITE_AGENT_URL is not defined in the environment variables.");
   }
-  
+
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [agentTyping, setAgentTyping] = useState(false);
@@ -75,6 +76,12 @@ export default function Twin() {
       behavior: method
     });
   }
+
+  useEffect(() => {
+    if (!agentTyping) {
+      textareaRef.current?.focus()
+    }
+  }, [agentTyping]);
 
   useEffect(() => {
     const chat = chatRef.current;

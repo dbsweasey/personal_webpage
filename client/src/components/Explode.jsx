@@ -38,19 +38,32 @@ export default function Explode() {
 
     let stars = generateStars(size.width, size.height);
     let animationFrameId;
+    let lastTime = null;
+
+    // Same per-frame -> per-time normalization as Stars.jsx, so the
+    // explosion plays at the same speed on every display.
+    const BASE_FRAME_MS = 1000 / 60;
+    const MAX_DELTA = 4;
 
     window.addEventListener("resize", resizeCanvas);
 
-    const animate = () => {
+    const animate = (timestamp) => {
+      if (lastTime === null) lastTime = timestamp;
+      const delta = Math.min(
+        (timestamp - lastTime) / BASE_FRAME_MS,
+        MAX_DELTA
+      );
+      lastTime = timestamp;
+
       context.clearRect(0, 0, size.width, size.height);
       stars.forEach((s) => {
-        s.x += s.mag * Math.cos(s.dir) * 2;
-        s.y += s.mag * Math.sin(s.dir);
-        s.alpha -= 0.015;
+        s.x += s.mag * Math.cos(s.dir) * 2 * delta;
+        s.y += s.mag * Math.sin(s.dir) * delta;
+        s.alpha -= 0.015 * delta;
 
         context.beginPath();
         context.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        context.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
+        context.fillStyle = `rgba(255, 255, 255, ${Math.max(s.alpha, 0)})`;
         context.fill();
       });
 
@@ -60,9 +73,10 @@ export default function Explode() {
       }
     };
 
-    animate();
+    animationFrameId = requestAnimationFrame(animate);
 
     return () => {
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", resizeCanvas);
     };
   }, [size.width, size.height]);

@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://digital-twin-mj4u.onrender.com",
+        target: "http://localhost:8000",
         changeOrigin: true,
       }
     }

@@ -868,6 +868,14 @@ canvas {
     right: -200%;
     text-align: right;
     margin: 0;
+    /* #name has no explicit width, so its shrink-to-fit width is computed
+       from the *current* animated `right` offset - as float-in tweens
+       `right` from -100% to 10%, the available width (and so the text's
+       wrap points) keeps changing too, making the paragraph below visibly
+       reflow mid-animation instead of just sliding in. Locking width to
+       what the settled right:10% state already resolves to (90% of the
+       containing block) keeps wrapping identical for the whole animation. */
+    width: 90%;
   }
 
   #name h3 {

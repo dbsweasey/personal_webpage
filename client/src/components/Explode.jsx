@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 
 export default function Explode() {
   const canvasRef = useRef(null);
+  const starsRef = useRef([]);
   const [size, setSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -31,12 +32,19 @@ export default function Explode() {
     return particles;
   };
 
+  // Generate the burst once, on mount - not tied to `size`, so a resize
+  // mid-explosion (e.g. a mobile browser's address bar collapsing) can't
+  // wipe it out and restart the animation from scratch.
+  useEffect(() => {
+    starsRef.current = generateStars(size.width, size.height);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     const canvas = canvasRef.current;
 
     const context = canvas.getContext("2d");
 
-    let stars = generateStars(size.width, size.height);
     let animationFrameId;
     let lastTime = null;
 
@@ -56,7 +64,7 @@ export default function Explode() {
       lastTime = timestamp;
 
       context.clearRect(0, 0, size.width, size.height);
-      stars.forEach((s) => {
+      starsRef.current.forEach((s) => {
         s.x += s.mag * Math.cos(s.dir) * 2 * delta;
         s.y += s.mag * Math.sin(s.dir) * delta;
         s.alpha -= 0.015 * delta;
@@ -67,8 +75,8 @@ export default function Explode() {
         context.fill();
       });
 
-      stars = stars.filter((s) => s.alpha > 0);
-      if (stars.length > 0) {
+      starsRef.current = starsRef.current.filter((s) => s.alpha > 0);
+      if (starsRef.current.length > 0) {
         animationFrameId = requestAnimationFrame(animate);
       }
     };

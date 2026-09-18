@@ -64,6 +64,10 @@ export default function Explode() {
     const canvas = canvasRef.current;
 
     const context = canvas.getContext("2d");
+    // Solid white; per-particle fade is done with globalAlpha below instead
+    // of re-parsing a fresh `rgba(...)` color string on every particle,
+    // every frame - a real cost in a loop running 60x/sec.
+    context.fillStyle = "rgb(255, 255, 255)";
 
     let animationFrameId;
     let lastTime = null;
@@ -72,6 +76,14 @@ export default function Explode() {
     // explosion plays at the same speed on every display.
     const BASE_FRAME_MS = 1000 / 60;
     const MAX_DELTA = 4;
+
+    // Bias movement toward whichever axis the screen is actually longer
+    // on, instead of a fixed "X moves 2x Y" - that happened to look right
+    // on wide desktop monitors but is backwards on a tall phone screen,
+    // where the burst should spread more vertically, not horizontally.
+    const minDim = Math.min(size.width, size.height);
+    const xBias = size.width / minDim;
+    const yBias = size.height / minDim;
 
     window.addEventListener("resize", resizeCanvas);
 
@@ -85,13 +97,13 @@ export default function Explode() {
 
       context.clearRect(0, 0, size.width, size.height);
       starsRef.current.forEach((s) => {
-        s.x += s.mag * Math.cos(s.dir) * 2 * delta;
-        s.y += s.mag * Math.sin(s.dir) * delta;
+        s.x += s.mag * Math.cos(s.dir) * xBias * delta;
+        s.y += s.mag * Math.sin(s.dir) * yBias * delta;
         s.alpha -= 0.015 * delta;
 
+        context.globalAlpha = Math.max(s.alpha, 0);
         context.beginPath();
         context.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        context.fillStyle = `rgba(255, 255, 255, ${Math.max(s.alpha, 0)})`;
         context.fill();
       });
 

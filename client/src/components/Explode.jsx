@@ -35,7 +35,14 @@ export default function Explode() {
         x: width / 2,
         y: height / 2,
         radius: (Math.random() * 3 + 1) * scale,
-        mag: (Math.random() + 0.2) * 20 * scale,
+        // Lower base magnitude (was *20) than the original tuning: since
+        // movement is delta-scaled to real elapsed time, a device
+        // rendering fewer actual frames doesn't just play the burst at the
+        // right speed - each frame it *does* render has to jump further to
+        // stay on schedule, which reads as choppy/stroboscopic rather than
+        // "slow." Smaller per-frame jumps are less perceptible as choppy
+        // even when the frame rate itself is uneven.
+        mag: (Math.random() + 0.2) * 12 * scale,
         dir: Math.random() * 2 * Math.PI,
         speedX: (Math.random() - 0.5) * 30,
         speedY: (Math.random() - 0.5) * 5,

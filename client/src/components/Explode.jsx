@@ -1,5 +1,10 @@
 import { useRef, useState, useEffect } from "react";
 
+// Fewer particles on small/mobile viewports - same threshold Stars.jsx
+// uses, since the two run concurrently during the explosion and mobile
+// CPUs can't keep up with the desktop-tuned particle count at 60fps.
+const PARTICLE_COUNT = window.innerWidth < 1000 ? 60 : 150;
+
 export default function Explode() {
   const canvasRef = useRef(null);
   const starsRef = useRef([]);
@@ -16,13 +21,21 @@ export default function Explode() {
   };
 
   const generateStars = (width, height) => {
+    // Scale particle size/speed down for smaller viewports, so the burst
+    // takes up roughly the same proportion of the screen on a phone as it
+    // does on a desktop monitor, instead of the same fixed pixel sizes
+    // looking oversized on a small screen. Capped at 1 so desktop (already
+    // tuned) is unaffected, floored at 0.5 so mobile particles don't shrink
+    // to near-invisible.
+    const scale = Math.min(1, Math.max(0.5, Math.min(width, height) / 1000));
+
     let particles = [];
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
       particles.push({
         x: width / 2,
         y: height / 2,
-        radius: Math.random() * 3 + 1,
-        mag: (Math.random() + 0.2) * 20,
+        radius: (Math.random() * 3 + 1) * scale,
+        mag: (Math.random() + 0.2) * 20 * scale,
         dir: Math.random() * 2 * Math.PI,
         speedX: (Math.random() - 0.5) * 30,
         speedY: (Math.random() - 0.5) * 5,

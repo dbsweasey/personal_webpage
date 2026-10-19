@@ -77,7 +77,7 @@ function App() {
       case "About":
         return <About />;
       case "Projects":
-        return <Projects />;
+        return <Projects onPageChange={handlePageChange} />;
       case "Twin":
         return <Twin />;
       default:

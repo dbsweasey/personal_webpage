@@ -568,11 +568,20 @@ canvas {
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 2.5%;
+  /* Scroll once the list outgrows the description panel. The cards' shadow and
+     hover glow reach ~20px up/left and ~40px down/right, so pad the scroll box
+     by that much (or clipping cuts them off) and pull it back out with negative
+     margins so the cards stay where they were. */
+  margin: -20px -40px 0 calc(2.5% - 20px);
+  max-height: 620px;
+  overflow-y: auto;
+  padding: 20px 40px 20px 20px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
 }
 
 .project-container {
-  flex: 1;
+  flex: 0 0 auto;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -635,6 +644,12 @@ canvas {
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.2s ease;
+}
+
+button.project-action {
+  border-top: none;
+  border-left: none;
+  cursor: pointer;
 }
 
 .project-action:hover {
@@ -924,6 +939,7 @@ canvas {
     min-height: 0;
     margin-left: 5%;
     margin-right: 5%;
+    margin-bottom: 12px;
   }
 
   .description-container h2 {
@@ -937,6 +953,29 @@ canvas {
   .project-img {
     width: 100px;
     height: 100px;
+  }
+
+  .description-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.227);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .description-close:active {
+    border-color: rgba(0, 200, 255, 0.9);
   }
 
   .project-action {
@@ -996,15 +1035,19 @@ canvas {
   }
 
   .project-list-container {
-    margin-left: 0;
-    margin-top: 0;
+    margin: 0;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
   }
 
   .project-container {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-left: 5%;
     margin-right: 5%;
-    min-height: 80px;
+    margin-bottom: 12px;
+    min-height: 56px;
+    max-height: 56px;
   }
 
   /* FOOTER */

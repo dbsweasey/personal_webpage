@@ -171,7 +171,12 @@
 }
 
 .composer-text {
-  flex: 0 0 20px;
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
   font-size: var(--twin-font-size-sm);
   color: var(--twin-color-text);
   text-align: center;
@@ -182,6 +187,34 @@
   background-color: var(--twin-color-surface);
   padding: 2px;
   border-radius: 4px;
+}
+
+.btn-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid var(--twin-color-accent);
+  background-color: var(--twin-color-surface);
+  color: var(--twin-color-text);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-clear:hover:not(:disabled) {
+  background-color: var(--twin-color-accent);
+}
+
+.btn-clear:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .msg {
@@ -276,6 +309,63 @@
   border-radius: 50%;
 }
 
+.twin-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  margin: 40px auto 0;
+  max-width: 600px;
+}
+
+.twin-intro p {
+  margin: 0;
+}
+
+.twin-intro-title {
+  color: var(--twin-color-accent-soft);
+  font-weight: bold;
+}
+
+.twin-intro-text {
+  font-size: var(--twin-font-size-sm);
+  line-height: 1.5;
+}
+
+.twin-intro-label {
+  padding-top: 12px;
+  font-size: var(--twin-font-size-sm);
+  color: var(--twin-color-text-muted);
+}
+
+.twin-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.twin-suggestion {
+  background: var(--twin-color-surface);
+  color: var(--twin-color-text);
+  border: 1px solid var(--twin-color-accent);
+  border-radius: var(--twin-radius-composer);
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: var(--twin-font-size-sm);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.twin-suggestion:hover {
+  background-color: var(--twin-color-accent);
+  border-color: var(--twin-color-accent-hover);
+}
+
 .typing-indicator {
   display: flex;
   align-items: center;
@@ -349,6 +439,23 @@
 
   .composer-text {
     font-size: 0.8rem;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 4px;
+  }
+
+  .composer-text-sep {
+    display: none;
+  }
+
+  .twin-intro {
+    margin-top: 20px;
+  }
+
+  .twin-intro-text,
+  .twin-intro-label,
+  .twin-suggestion {
+    font-size: 0.9rem;
   }
 }
 

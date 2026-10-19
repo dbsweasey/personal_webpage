@@ -1,10 +1,17 @@
 import { useEffect, useState, useRef, useLayoutEffect } from "react"
-import { SendHorizontal } from "lucide-react";
+import { SendHorizontal, RotateCcw } from "lucide-react";
 
 import PageHeader from "./PageHeader";
 import TwinMessage from "./TwinMessage";
 import "./Twin.css"
 import TypingIndicator from "./TypingIndicator";
+
+const SUGGESTED_PROMPTS = [
+  "What projects have you worked on?",
+  "What's your tech stack?",
+  "Tell me about your work experience.",
+  "Can I get in contact with you?"
+];
 
 export default function Twin() {
   const URL = import.meta.env.VITE_AGENT_URL;
@@ -44,6 +51,25 @@ export default function Twin() {
       console.error('Fetch failed:', err);
     }
     scroll("instant");
+  }
+
+  const clearSession = async () => {
+    if (agentTyping) return;
+    try {
+      const response = await fetch(`${URL}/session`, {
+        method: 'DELETE',
+        credentials: 'include'
+      });
+
+      if (!response.ok) {
+        throw new Error(`Could not clear session. Status: ${response.status}`);
+      }
+      setMessages([]);
+      setMessage("");
+      await connect();
+    } catch (err) {
+      console.error('Clear session failed:', err);
+    }
   }
 
   useLayoutEffect(() => {
@@ -112,7 +138,9 @@ export default function Twin() {
     return formatter.format(now);
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => sendMessage(message);
+
+  const sendMessage = async (message) => {
     if (agentTyping) return;
     if (!message.trim()) {
       setMessage("");
@@ -183,6 +211,23 @@ export default function Twin() {
       <div className="container">
         <div ref={chatRef} className="convo-container">
           <div className="convo-inner">
+            {messages.length === 0 && !agentTyping && (
+              <div className="twin-intro">
+                <p className="twin-intro-title">Hi, I'm David's digital twin.</p>
+                <p className="twin-intro-text">
+                  I'm an AI built from David's background, projects, and experience.
+                  Ask me anything you'd ask him, from his skills and work history to what he's building now.
+                </p>
+                <p className="twin-intro-label">Try asking:</p>
+                <div className="twin-suggestions">
+                  {SUGGESTED_PROMPTS.map((prompt) => (
+                    <button key={prompt} className="twin-suggestion" onClick={() => sendMessage(prompt)}>
+                      {prompt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
             {/* Chat messages will populate here */}
             {messages.map((m, i) => {
               return <TwinMessage key={i} role={m.role} body={m.body} timestamp={m.timestamp} />
@@ -210,7 +255,18 @@ export default function Twin() {
             </button>
           </div>
           <div className="composer-text">
-            <span className="key">ENTER</span> to send | <span className="key">SHIFT</span> + <span className="key">ENTER</span> for newline
+            <span>
+              <span className="key">ENTER</span> to send | <span className="key">SHIFT</span> + <span className="key">ENTER</span> for newline
+            </span>
+            <span className="composer-text-sep">|</span>
+            <button
+              className="btn-clear"
+              onClick={clearSession}
+              disabled={agentTyping || messages.length === 0}
+              aria-disabled={agentTyping || messages.length === 0}
+            >
+              <RotateCcw size="1em" /> New chat
+            </button>
           </div>
         </div>
       </div>

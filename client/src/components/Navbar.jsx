@@ -16,7 +16,6 @@ export default function Navbar(props) {
   const [navbarShow, setNavbarShow] = useState(() => !props.introEnabled);
   // The entrance glow only ever plays once, on the real timed reveal.
   const [playGlow, setPlayGlow] = useState(false);
-  const [currentPage, setCurrentPage] = useState("Home");
   // Mobile-only: expanded by default on Home, collapsed by default on every
   // other page. Resets on every navigation rather than being remembered.
   const [navExpanded, setNavExpanded] = useState(props.activePage === "Home");
@@ -82,25 +81,22 @@ export default function Navbar(props) {
         <Navbutton
           click={() => {
             props.onPageChange(
-              currentPage === "Projects" ? "Home" : "Projects"
+              props.activePage === "Projects" ? "Home" : "Projects"
             );
-            setCurrentPage(currentPage === "Projects" ? "Home" : "Projects");
           }}
-          name={currentPage === "Projects" ? "Home" : "Projects"}
+          name={props.activePage === "Projects" ? "Home" : "Projects"}
         ></Navbutton>
         <Navbutton
           click={() => {
-            props.onPageChange(currentPage === "About" ? "Home" : "About");
-            setCurrentPage(currentPage === "About" ? "Home" : "About");
+            props.onPageChange(props.activePage === "About" ? "Home" : "About");
           }}
-          name={currentPage === "About" ? "Home" : "About"}
+          name={props.activePage === "About" ? "Home" : "About"}
         ></Navbutton>
         <Navbutton
           click={() => {
-            props.onPageChange(currentPage === "Twin" ? "Home" : "Twin");
-            setCurrentPage(currentPage === "Twin" ? "Home" : "Twin")
+            props.onPageChange(props.activePage === "Twin" ? "Home" : "Twin");
           }}
-          name={currentPage === "Twin" ? "Home" : "Twin"}
+          name={props.activePage === "Twin" ? "Home" : "Twin"}
         ></Navbutton>
       </div>
 

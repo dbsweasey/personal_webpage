@@ -4,7 +4,7 @@ import ProjectCard from "./ProjectCard";
 import projects from "../assets/projects.json";
 import PageHeader from "./PageHeader";
 
-export default function Projects() {
+export default function Projects({ onPageChange }) {
   const [currProject, setCurrProject] = useState(null);
   const [size, setSize] = useState({
     width: window.innerWidth,
@@ -31,7 +31,7 @@ export default function Projects() {
     <div>
       <PageHeader title="Projects" />
       <div className="projects-container">
-        <ProjectDescription currentProject={currProject} />
+        <ProjectDescription currentProject={currProject} onPageChange={onPageChange} />
         <div className="project-list-container">
           {projects.map((project, i) => {
             return (
@@ -55,7 +55,12 @@ export default function Projects() {
         <div className="project-list-container">
           {projects.map((project, i) => {
             return currProject === project ? (
-              <ProjectDescription currentProject={currProject} />
+              <ProjectDescription
+                key={i}
+                currentProject={currProject}
+                onPageChange={onPageChange}
+                onClose={() => setCurrProject(null)}
+              />
             ) : (
               <ProjectCard
                 onHover={onHover}

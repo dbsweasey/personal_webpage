@@ -8,7 +8,7 @@ Check out my Website! It outlines me, my resume, my passions, and my projects. D
 
 ## Future Improvements
 Be on the lookout for these updates hopefully coming soon
-- Virtual twin (AI-powered avatar to answer questions about me)
+- Virtual twin (AI-powered avatar to answer questions about me) <-- Now live!
 - Project demos (posted to youtube)
 - More projects
 - Other suprises

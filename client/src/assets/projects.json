@@ -1,4 +1,16 @@
-[
+[    
+    {
+      "name": "Digital Twin",
+      "link": "",
+      "img": "/project_images/digital-twin.png",
+      "desc": "An AI twin built from my background, projects, and experience. You can ask it anything about my professional life, and it will do its best to answer. Try it out!",
+      "actions": [
+        {
+            "action": "Try it out!",
+            "page": "Twin"
+        }
+      ]
+    },
     {
       "name": "Skin Cancer CNN Classifier",
       "link": "filler",
